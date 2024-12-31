@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/user');
-const {jwtAuthMiddleware, generateToken} = require('../middleware/jwt');
+const {jwtAuthMiddleware} = require('../middleware/jwt');
 const Candidate = require('../models/candidate');
 
 
@@ -55,10 +55,10 @@ router.put('/:candidateID', jwtAuthMiddleware, async (req, res)=>{
             return res.status(404).json({ error: 'Candidate not found' });
         }
 
-        console.log('candidate data updated');
+        // console.log('candidate data updated');
         res.status(200).json(response);
     }catch(err){
-        console.log(err);
+        // console.log(err);
         res.status(500).json({error: 'Internal Server Error'});
     }
 })
@@ -76,10 +76,10 @@ router.delete('/:candidateID', jwtAuthMiddleware, async (req, res)=>{
             return res.status(404).json({ error: 'Candidate not found' });
         }
 
-        console.log('candidate deleted');
+        // console.log('candidate deleted');
         res.status(200).json(response);
     }catch(err){
-        console.log(err);
+        // console.log(err);
         res.status(500).json({error: 'Internal Server Error'});
     }
 })
@@ -121,7 +121,7 @@ router.get('/vote/:candidateID', jwtAuthMiddleware, async (req, res)=>{
 
         return res.status(200).json({ message: 'Vote recorded successfully' });
     }catch(err){
-        console.log(err);
+        // console.log(err);
         return res.status(500).json({error: 'Internal Server Error'});
     }
 });
@@ -142,7 +142,7 @@ router.get('/vote/count', async (req, res) => {
 
         return res.status(200).json(voteRecord);
     }catch(err){
-        console.log(err);
+        // console.log(err);
         res.status(500).json({error: 'Internal Server Error'});
     }
 });
@@ -156,7 +156,7 @@ router.get('/', async (req, res) => {
         // Return the list of candidates
         res.status(200).json(candidates);
     } catch (err) {
-        console.error(err);
+        // console.error(err);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 });
